@@ -1,4 +1,4 @@
-# promise-all-series
+# [promise-all-series](https://github.com/ironman9967/promise-all-series)
 
 Runs an array of Promises in series
 
