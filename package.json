@@ -2,15 +2,19 @@
   "name": "promise-series-all",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "watch": "npm-watch",
     "babel": "rm -rf dist && babel src --ignore node_modules --copy-files --out-dir dist",
     "test": "npm run babel && mocha dist/**/*.test.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Tyson Hester",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ironman9967/promise-all-series"
+  },
+  "license": "MIT",
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.23.0",
