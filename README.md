@@ -2,7 +2,7 @@
 
 Runs an array of Promises in series
 
-### Installing
+### [Installing](http://www.google.com)
 ```
 npm i promise-all-series -S
 ```
@@ -20,29 +20,32 @@ import { PromiseAllSeries } from 'promise-all-series'
 const myPromiseSeries = PromiseAllSeries([
 
     // note the delay of 1000ms
-    x => new Promise(resolve => setTimeout(() => resolve(x), 1000)),
+    x => new Promise(resolve => 
+        setTimeout(() => resolve(x), 1000)),
     
-    // the delay here is only 500ms, but this Promise will still resolve 
-    //  after the first because they are run in series
-    (a, b) => new Promise(resolve => setTimeout(() => resolve(a + b), 500)),
+    // the delay here is only 500ms, but this Promise will still 
+    //  resolve after the first because they are run in series
+    (a, b) => new Promise(resolve => 
+        setTimeout(() => resolve(a + b), 500)),
     
     // no delay here, but this Promise will resolve last
     () => Promise.resolve(2)
     
 ])
 
-// PromiseAllSeries returns a function that accepts an optional array of 
-//  parameter arrays to pass in to each Promise function, if omitted, the 
-//  Promise functions will be called with no parameters. Whether you are 
-//  supplying parameters or not, this function MUST be called
+// PromiseAllSeries returns a function that accepts an optional 
+//  array of parameter arrays to pass in to each Promise function, 
+//  if omitted, the Promise functions will be called with no 
+//  parameters. Whether you are supplying parameters or not, this 
+//  function MUST be called
 myPromiseSeries([
-    [ 0 ],      // sent to the first Promise function: x == 0
-    [ 2, -1 ],  // sent to the second Promise function: a == 2, b == -1
-    []          // no parameters will be sent to the third Promise function
+    [ 0 ],      // sent to the first Promise: x == 0
+    [ 2, -1 ],  // sent to the second Promise: a == 2, b == -1
+    []          // no parameters will be sent to the third Promise
 ])
 
-// this function returns a Promise that resolves an array of results arrays from
-//  each Promise function
+// this function returns a Promise that resolves an array of 
+//  results arrays from each Promise function
 .then(([
     [ x ],
     [ aPlusB ],
