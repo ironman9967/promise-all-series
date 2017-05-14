@@ -21,4 +21,34 @@ describe('promise-series-all', () => {
             expect(arr[2][0]).to.be.equal(2)
         })
     )
+
+
+    	it('should take an array of promises and produce an array of results', (done) => {
+		let haveIBeenCalledAlready = false
+
+		const slowestPromise = () => new Promise((resolve, reject) => {
+			setTimeout(() => {
+				if(haveIBeenCalledAlready){
+					reject(new Error(`Didn't run in series`))
+				}
+				resolve('good')
+			}, 1000)
+		})
+
+		const slowPromise = () => new Promise((resolve, reject) => {
+			setTimeout(() => {
+				haveIBeenCalledAlready = true
+				resolve('good')
+			}, 500)
+		})
+
+		PromiseAllSeries([
+		    slowestPromise,
+		    slowPromise
+		])
+		.then(([slowest, slow]) => {
+		    expect(slowest).to.be.equal('good')
+		    expect(slow).to.be.equal('good')
+		})
+	})
 })
