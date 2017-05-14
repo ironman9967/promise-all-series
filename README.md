@@ -2,7 +2,7 @@
 
 Runs an array of Promises in series
 
-### [Installing](http://www.google.com)
+### [Installing](https://www.npmjs.com/package/promise-series-all)
 ```
 npm i promise-all-series -S
 ```
