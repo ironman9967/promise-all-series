@@ -10,15 +10,15 @@ describe('promise-series-all', () => {
             (x, y) => Promise.resolve(x + y),
             () => Promise.resolve(2)
         ])([
-            [ 0 ],
+            0,
             [ 2, -1 ],
-            []
+            void 0
         ]).then(arr => {
             expect(arr).to.be.an('array')
             expect(arr.length).to.be.equal(3)
-            expect(arr[0][0]).to.be.equal(0)
-            expect(arr[1][0]).to.be.equal(1)
-            expect(arr[2][0]).to.be.equal(2)
+            expect(arr[0]).to.be.equal(0)
+            expect(arr[1]).to.be.equal(1)
+            expect(arr[2]).to.be.equal(2)
         })
     )
 
@@ -35,15 +35,15 @@ describe('promise-series-all', () => {
 				    else {
 				        resolve('good')
 				    }
-			    }, 1000)
+			    }, 250)
 		    )
 
 		const slowPromise = () => 
 		    new Promise((resolve, reject) =>
 			    setTimeout(() => {
 				    haveIBeenCalledAlready = true
-				    resolve('good')
-			    }, 500)
+				    resolve('good2')
+			    }, 125)
 	    	)
 
 		return PromiseAllSeries([
@@ -51,8 +51,8 @@ describe('promise-series-all', () => {
 		    slowPromise
 		])()
 		.then(([slowest, slow]) => {
-		    expect(slowest[0]).to.be.equal('good')
-		    expect(slow[0]).to.be.equal('good')
+		    expect(slowest).to.be.equal('good')
+		    expect(slow).to.be.equal('good2')
 		})
 	})
 })
